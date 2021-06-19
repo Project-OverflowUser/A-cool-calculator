@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>The cool calculator!</title>
+    <meta name="description" itemprop="description" content="Basic Online Calculator with 10-digit keypad and 4 functions to add, subtract, multiply and divide numbers. Includes basic handheld calculator functions for square, square root, percent, sign change, Pi and memory."
+    />
+    <meta itemprop="accessibilityFeature" content="highContrastDisplay" />
+    <meta itemprop="accessibilityFeature" content="fullKeyboardControl" />
+    <meta itemprop="accessibilityFeature" content="fullMouseControl" />
+    <meta itemprop="accessibilityFeature" content="fullTouchControl" />
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png?v=20170215">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+        html {
+            -ms-text-size-adjust: 100%;
+            /* 2 */
+            -webkit-text-size-adjust: 100%;
+            /* 2 */
+        }
+
+        body {
+            margin: 0;
+        }
+
+        aside,
+        footer,
+        header,
+        main,
+        nav {
+            display: block;
+        }
+
+        a {
+            background-color: transparent;
+        }
+
+        a:active,
+        a:hover {
+            outline: 0;
+        }
+
+        b,
+        strong {
+            font-weight: bold;
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+        }
+
+        sup {
+            top: -0.5em;
+        }
+
+        sub {
+            bottom: -0.25em;
+        }
+
+        img {
+            border: 0;
+        }
+
+        hr {
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            height: 0;
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            color: inherit;
+            /* 1 */
+            font: inherit;
+            /* 2 */
+            margin: 0;
+            /* 3 */
+        }
+
+        button {
+            overflow: visible;
+        }
+
+        button,
+        select {
+            text-transform: none;
+        }
+
+        button,
+        html input[type="button"],
+        /* 1 */
+
+        input[type="reset"],
+        input[type="submit"] {
+            -webkit-appearance: button;
+            cursor: pointer;
+        }
+
+        button[disabled],
+        html input[disabled] {
+            cursor: default;
+        }
+
+        button::-moz-focus-inner,
+        input::-moz-focus-inner {
+            border: 0;
+            padding: 0;
+        }
+
+        input {
+            line-height: normal;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            height: auto;
+        }
+
+        input[type="search"] {
+            -webkit-appearance: textfield;
+            /* 1 */
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+        input[type="search"]::-webkit-search-cancel-button,
+        input[type="search"]::-webkit-search-decoration {
+            -webkit-appearance: none;
+        }
+
+        fieldset {
+            border: 1px solid #c0c0c0;
+            margin: 0 2px;
+            padding: 0.35em 0.625em 0.75em;
+        }
+
+        textarea {
+            overflow: auto;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 4px;
+        }
+
+        div#table {
+            display: table;
+            margin: auto;
+        }
+
+        div#row {
+            display: table-row;
+        }
+
+        div#calculatorWrap {
+            display: table-cell;
+            background: #f0f0f0;
+            padding: 4px 8px 8px 8px;
+            border: 1px solid #aaa;
+            border-radius: 4px;
+            text-align: center;
+            margin: auto;
+        }
+
+
+        @media screen and (max-width: 350px) {
+            div#calculatorWrap {
+                padding: 1px 1px 1px 1px;
+            }
+        }
+
+        input.button:focus,
+        input.window:focus {
+
+            outline: 1px solid #000;
+        }
+
+        input.button {
+            width: 2.75em;
+            line-height: 2.096em;
+            text-align: center;
+            color: #444444;
+            background-color: #ddd;
+            border: 1px solid #ccc;
+            font-size: 1.5em;
+            margin-top: 4px;
+        }
+
+        input.window {
+            width: 11.5em;
+            line-height: 2em;
+            border: 1px solid #999;
+            font-size: 1.5em;
+            margin-top: 4px;
+            color: #000000;
+            background-color: #ffffff;
+            text-align: right;
+        }
+
+        input.number {
+            background-color: #f6f6f6;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        input.operator {
+            background-color: #3c89d0;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        input.button:hover {
+            border: 1px solid #999;
+        }
+
+        input.button:active {
+            background-color: #ccc;
+        }
+
+        h1.heading,
+        h2.heading {
+            text-align: center;
+            font-style: italic;
+            font-size: 1.5em;
+            margin: 4px;
+            color: #666666;
+            background-color: #FFFFFF;
+        }
+
+        p {
+            margin: 1em;
+        }
+
+        .hidden {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+
+        .note {
+            font-weight: normal;
+            font-style: italic;
+            color: #666;
+            font-size: 80%;
+        }
+
+        .alignCenter {
+            text-align: center;
+        }
+
+        .alignRight {
+            text-align: right;
+        }
+
+        div#titleSmall {
+            margin: 12px 4px 0px 4px;
+            font-size: 70%;
+        }
+
+        div#titleSmall a {
+            text-decoration: none;
+        }
+
+        div#titleSmall span.calculator {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2em;
+            color: #333333;
+            background-color: inherit;
+            font-weight: bold;
+        }
+
+        div#titleSmall span.Hood {
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 1.1em;
+            color: #bd362f;
+            background-color: inherit;
+            font-weight: bold;
+            margin-left: -3px;
+        }
+    </style>
+</head>
+
+<body>
+            <div id="table">
+                <div id="row">
+                    <div id="calculatorWrap">
+                        <form action="javascript:void(0);" id="calculator" name="calculator">
+                            <div>
+                                <label for="display" class="hidden">display only</label>
+                                <input type="button" class="window" name="display" id="display" />
+                            </div>
+                            <div>
+                                <input type="button" class="button" name="memory_clearButton" value="mc" onClick="memory_clear()" title="Clear the memory." />
+                                <input type="button" class="button" name="memory_plusButton" value="m+" onClick="memory_plus()" title="Add the displayed value to the memory." />
+                                <input type="button" class="button" name="memory_minusButton" value="m-" onClick="memory_minus()" title="Subtract the displayed value from the memory." />
+                                <input type="button" class="button" name="memory_recallButton" value="mr" onClick="memory_recall()" title="MR Recall the value stored in memory and display it" />
+                            </div>
+                            <div>
+                                <input type="button" class="button" name="clearButton" value="AC" onClick="display_clear()" title="CE is Clear Entry; AC is Clear All; Press once to clear current entry, press twice to clear all." />
+                                <input type="button" class="button" name="root2" value="&radic;x" onClick="func('squareroot')" title="Calculate the square root of the displayed value." />
+                                <input type="button" class="button" name="percentButton" value="%" onClick="func('percent')" title="Enter displayed value as a percentage and convert to its decimal equivalent." />
+                                <input type="button" class="button operator" name="divide" value="&divide;" onClick="enterOperator('/')" title="Divide (press /)" />
+                            </div>
+                            <div>
+                                <input type="button" class="button number" name="seven" value="7" onClick="enterValue('7')" />
+                                <input type="button" class="button number" name="eight" value="8" onClick="enterValue('8')" />
+                                <input type="button" class="button number" name="nine" value="9" onClick="enterValue('9')" />
+                                <input type="button" class="button operator" name="multiply" value="&times;" onClick="enterOperator('*')" title="Multiply (press &times;)" />
+                            </div>
+                            <div>
+                                <input type="button" class="button number" name="four" value="4" onClick="enterValue('4')" />
+                                <input type="button" class="button number" name="five" value="5" onClick="enterValue('5')" />
+                                <input type="button" class="button number" name="six" value="6" onClick="enterValue('6')" />
+                                <input type="button" class="button operator" name="subtract" value="&minus;" onClick="enterOperator('-')" title="Subtract (press -)" />
+                            </div>
+                            <div>
+                                <input type="button" class="button number" name="one" value="1" onClick="enterValue('1')" />
+                                <input type="button" class="button number" name="two" value="2" onClick="enterValue('2')" />
+                                <input type="button" class="button number" name="three" value="3" onClick="enterValue('3')" />
+                                <input type="button" class="button operator" name="add" value="&#43;" onClick="enterOperator('+')" title="Add (press +)" />
+                            </div>
+                            <div>
+                                <input type="button" class="button number" name="zero" value="0" onClick="enterValue('0')" />
+                                <input type="button" class="button number" name="decimal" value="." onClick="enterValue('.')" />
+                                <input type="button" class="button number" name="negateButton" value="+/-" onClick="func('negate')" title="Negate the displayed value" />
+                                <input type="button" class="button operator" name="calculate" value="&#61;" onclick="enterOperator('=')" title="Execute calculation (press =)" />
+                            </div>
+                            <div>
+                                <input type="button" class="button" name="negateButton" value="&pi;" onClick="func('pi')" title="Display the value of Pi" />
+                                <input type="button" class="button" name="negateButton" value="x&sup2;" onClick="func('square')" title="Square the displayed value" />
+                                <input type="button" class="button" name="zero" value="R2" onClick="func('r2')" title="Round display to 2 decimal places" />
+                                <input type="button" class="button" name="decimal" value="R0" onClick="func('r0')" title="Round display to 0 decimal places" />
+                            </div>
+                            <input type="hidden" name="memory" value="0" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
